@@ -17,7 +17,7 @@ struct no {
 };
 
 FILA* fila_criar() {
-    FILA* fila = (FILA*) malloc(sizeof(fila));
+    FILA* fila = (FILA*) malloc(sizeof(FILA));
 
     if (fila != NULL) {
         fila->tamanho = 0;
@@ -33,6 +33,18 @@ void fila_destruir(FILA** fila) {
         return;
     }
 
+    NO *prox = (*fila)->frente;
+    NO *aux;
+
+    while (prox != NULL) {
+        aux = prox;
+        prox = prox->proximo;
+        item_destroy(&(aux->item)); //apaga o item junto
+        free(aux);
+    }
+
+    free(*fila);
+    *fila = NULL;
 }
 
 bool fila_inserir(FILA* fila, ITEM* item) {
@@ -52,11 +64,15 @@ bool fila_inserir(FILA* fila, ITEM* item) {
         return(false);
     }
 
-    if (fila->tras == NULL) {
+    no->item = item;
+    no->proximo = NULL;
+
+    if (fila_vazia(fila)) {
         fila->frente = no;
         fila->tras = no;
     } else {
         fila->tras->proximo = no;
+        fila->tras = no;
     }
 
     fila->tamanho++;
@@ -138,17 +154,12 @@ void fila_print(FILA* fila) {
     printf("  tamanho: %d\n", fila->tamanho);
     printf("  items: [ ");
 
-    NO* frente = fila->frente;
-    printf("%d ", item_get_key(frente->item));
-    while(frente->proximo != NULL) {
-        if (frente != NULL) {
-            printf("%d ", item_get_key(frente->item));
-            frente = frente->proximo;
-        }
+    NO* atual = fila->frente;
+    while (atual != NULL) {
+        printf("%d ", item_get_key(atual->item));
+        atual = atual->proximo;
     }
 
     printf("]\n");
     printf("}\n");
-
-    free(frente);
 }
