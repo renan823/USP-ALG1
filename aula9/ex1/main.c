@@ -20,7 +20,8 @@ int main(void) {
 
     lista_imprimir(lista);
 
-    lista_remover(lista, 4);
+    ITEM* item = lista_remover(lista, 4);
+    item_apagar(&item);
 
     lista_imprimir(lista);
 
