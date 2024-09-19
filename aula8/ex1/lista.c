@@ -122,6 +122,14 @@ bool lista_inserir(LISTA* lista, ITEM* item) {
     return(true);
 }
 
+bool lista_inserir_posicao(LISTA* lista, int posicao, ITEM* item) {
+    if (lista_cheia(lista)) {
+        return(false);
+    }
+
+    return(_inserir_posicao(lista, posicao, item));
+}
+
 ITEM* lista_remover(LISTA* lista, int chave) {
     int pos = -1;
 
@@ -136,6 +144,14 @@ ITEM* lista_remover(LISTA* lista, int chave) {
     }
 
     return(_remover_posicao(lista, pos));
+}
+
+ITEM* lista_remover_posicao(LISTA* lista, int posicao) {
+    if (lista_vazia(lista)) {
+        return(NULL);
+    }
+
+    return(_remover_posicao(lista, posicao));
 }
 
 bool lista_cheia(LISTA* lista) {
