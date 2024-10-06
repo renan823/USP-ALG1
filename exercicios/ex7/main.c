@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 int main(void) {
-    LISTA* lista = lista_criar(true); //ordenada
+    LISTA* lista = lista_criar(); //ordenada
 
     char c1 = 'c';
     char c2 = 'r';
@@ -12,15 +12,11 @@ int main(void) {
     char c4 = 'o';
     char c5 = 'r';
 
+    lista_inserir(lista, item_criar(9, &c1));
     lista_inserir(lista, item_criar(2, &c3));
-    lista_inserir(lista, item_criar(3, &c2));
-    lista_inserir(lista, item_criar(4, &c5));
-    lista_inserir(lista, item_criar(5, &c4));
-
-    lista_imprimir(lista);
-
-    ITEM* item = lista_remover(lista, 4);
-    item_apagar(&item);
+    lista_inserir(lista, item_criar(4, &c2));
+    lista_inserir(lista, item_criar(3, &c5));
+    lista_inserir(lista, item_criar(1, &c4));
 
     lista_imprimir(lista);
 

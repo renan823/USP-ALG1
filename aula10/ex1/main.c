@@ -12,6 +12,7 @@ int main(void) {
     char c4 = 'o';
     char c5 = 'r';
 
+    lista_inserir(lista, item_criar(1, &c1));
     lista_inserir(lista, item_criar(2, &c3));
     lista_inserir(lista, item_criar(3, &c2));
     lista_inserir(lista, item_criar(4, &c5));
